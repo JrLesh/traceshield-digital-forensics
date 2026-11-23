@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="en-ZA">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#071a2d">
+  <meta name="description" content="Digital forensics, incident response and cyber resilience support for South African small and medium businesses.">
+  <title>TraceShield Digital Forensics | Uncover the Evidence. Secure the Future.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{--navy:#071a2d;--navy2:#102e45;--teal:#10b8b3;--teal-light:#49d9d1;--mist:#f3f7f8;--ink:#102738;--muted:#5d707b;--line:#dce6e9;--white:#fff;--shadow:0 18px 55px rgba(7,26,45,.11)}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--white);color:var(--ink);font:16px/1.65 "DM Sans",Arial,sans-serif}
+    a{color:inherit}
+    .wrap{width:min(1160px,calc(100% - 44px));margin:auto}
+    .topbar{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.97);backdrop-filter:blur(14px);border-bottom:1px solid #e8eef0}
+    .nav{height:92px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+    .brand{display:flex;align-items:center;text-decoration:none}
+    .brand img{display:block;width:245px;height:auto;max-height:83px;object-fit:contain}
+    .links{display:flex;align-items:center;gap:30px}
+    .links a{font-size:14px;font-weight:700;text-decoration:none;color:#294252;transition:color .2s}
+    .links a:hover{color:var(--teal)}
+    .nav-cta,.button{display:inline-flex;align-items:center;justify-content:center;border:0;border-radius:7px;background:var(--teal);color:#052c35;text-decoration:none;font-weight:800;font-size:14px;padding:13px 19px;transition:background .2s,transform .2s,box-shadow .2s}
+    .nav-cta:hover,.button:hover{background:#31cdc5;transform:translateY(-1px);box-shadow:0 9px 22px rgba(16,184,179,.21)}
+    .menu-toggle{display:none;border:1px solid #cad8dc;border-radius:7px;background:white;color:var(--navy);padding:9px}
+    .hero{position:relative;min-height:620px;display:flex;align-items:center;overflow:hidden;background:linear-gradient(90deg,rgba(5,20,35,.97) 0%,rgba(5,20,35,.91) 38%,rgba(5,20,35,.61) 61%,rgba(5,20,35,.18) 100%),url('assets/incident-response-team.jpg') center 43%/cover no-repeat;color:white}
+    .hero:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(5,20,35,.3),transparent 38%);pointer-events:none}
+    .hero-content{position:relative;z-index:1;padding:92px 0 100px}
+    .eyebrow{display:inline-flex;align-items:center;gap:10px;color:#63e4dc;font:800 12px Manrope,sans-serif;letter-spacing:.16em;text-transform:uppercase}
+    .eyebrow:before{content:"";width:24px;height:2px;background:currentColor}
+    h1,h2,h3,p{margin-top:0}
+    h1{max-width:710px;margin:22px 0 20px;font:800 clamp(44px,5.5vw,72px)/1.05 Manrope,sans-serif;letter-spacing:-.055em}
+    h1 span{color:var(--teal-light)}
+    .hero-copy{max-width:610px;color:#e0e9ed;font-size:18px;line-height:1.75;margin-bottom:30px}
+    .hero-actions{display:flex;align-items:center;flex-wrap:wrap;gap:13px}
+    .button-outline{display:inline-flex;align-items:center;border:1px solid rgba(255,255,255,.55);border-radius:7px;padding:12px 18px;color:white;text-decoration:none;font-size:14px;font-weight:700;transition:border .2s,color .2s}
+    .button-outline:hover{border-color:var(--teal-light);color:var(--teal-light)}
+    .trust-row{position:relative;margin-top:-1px;background:var(--navy);color:white}
+    .trust-grid{display:grid;grid-template-columns:repeat(3,1fr);padding:25px 0}
+    .trust-item{display:flex;align-items:center;gap:13px;padding:3px 28px;border-right:1px solid rgba(255,255,255,.15)}
+    .trust-item:first-child{padding-left:0}.trust-item:last-child{border:0}
+    .trust-icon{width:44px;height:44px;flex:none;display:grid;place-items:center;border:1px solid rgba(73,217,209,.42);border-radius:50%;background:linear-gradient(145deg,rgba(73,217,209,.2),rgba(73,217,209,.07));color:#72f2e9;box-shadow:inset 0 0 16px rgba(73,217,209,.08)}
+    .trust-icon svg{width:23px;height:23px;display:block;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+    .trust-item strong{display:block;font:700 14px Manrope,sans-serif}
+    .trust-item span{display:block;color:#bdcbd2;font-size:12px}
+    .section{padding:88px 0}
+    .section-soft{background:var(--mist)}
+    .section-head{max-width:720px;margin:0 auto 43px;text-align:center}
+    .section-head .eyebrow{justify-content:center;color:#078e8b}
+    h2{margin:14px 0 15px;font:800 clamp(32px,4vw,46px)/1.15 Manrope,sans-serif;letter-spacing:-.045em;color:var(--navy)}
+    .section-head p{color:var(--muted);font-size:16px;margin-bottom:0}
+    .service-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .service{padding:29px 26px;border:1px solid var(--line);border-radius:11px;background:white;box-shadow:0 8px 25px rgba(7,26,45,.035);transition:transform .2s,box-shadow .2s}
+    .service:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+    .service-icon{width:48px;height:48px;display:grid;place-items:center;border-radius:10px;background:#e2f7f5;color:#067d7c;margin-bottom:21px}
+    .service h3{margin-bottom:10px;font:750 19px/1.3 Manrope,sans-serif;color:var(--navy)}
+    .service p{margin:0;color:var(--muted);font-size:15px}
+    .service-tag{display:inline-block;margin-top:21px;padding:5px 10px;border-radius:20px;background:#f0f5f6;color:#4b6672;font-size:12px;font-weight:800;letter-spacing:.07em;text-transform:uppercase}
+    .pricing-section{position:relative;overflow:hidden;background:radial-gradient(ellipse at 50% -15%,rgba(16,184,179,.24),transparent 54%),linear-gradient(135deg,#061624,#0a2941 58%,#071a2d);border-top:1px solid #13384e;border-bottom:1px solid #15394f}
+    .pricing-section:before,.pricing-section:after{content:"";position:absolute;width:360px;height:360px;border:1px solid rgba(73,217,209,.12);border-radius:50%;pointer-events:none}
+    .pricing-section:before{top:80px;left:-260px;box-shadow:0 0 0 28px rgba(73,217,209,.025),0 0 0 58px rgba(73,217,209,.02)}
+    .pricing-section:after{right:-255px;bottom:40px;box-shadow:0 0 0 30px rgba(73,217,209,.025),0 0 0 62px rgba(73,217,209,.02)}
+    .pricing-section .wrap{position:relative;z-index:1}
+    .pricing-section .section-head .eyebrow{color:var(--teal-light)}
+    .pricing-section .section-head h2{color:#fff}
+    .pricing-section .section-head p{color:#c8d8df}
+    .pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:stretch}
+    .price-card{position:relative;display:flex;flex-direction:column;padding:30px 27px;border:1px solid rgba(255,255,255,.72);border-top:4px solid var(--teal);border-radius:13px;background:linear-gradient(155deg,#fff,#f2f9fa);box-shadow:0 20px 48px rgba(0,0,0,.22);transition:transform .22s,box-shadow .22s}
+    .price-card:hover{transform:translateY(-8px);box-shadow:0 28px 58px rgba(0,0,0,.3)}
+    .price-card h3{margin:0 0 9px;color:var(--navy);font:800 20px/1.3 Manrope,sans-serif;letter-spacing:-.02em}
+    .price-card>p{min-height:48px;margin:0;color:#526a76;font-size:14px}
+    .price-amount{margin:20px 0 17px;color:#087f82;font:800 36px/1.05 Manrope,sans-serif;letter-spacing:-.045em}
+    .price-amount small{display:block;margin-top:7px;color:#627984;font:700 12px/1.4 "DM Sans",sans-serif;letter-spacing:.02em}
+    .price-features{display:grid;gap:12px;margin:0 0 25px;padding:0;list-style:none;color:#294654;font-size:14px;line-height:1.5}
+    .price-features li{display:flex;gap:10px;align-items:flex-start}
+    .price-features li:before{content:"✓";flex:none;display:grid;place-items:center;width:19px;height:19px;margin-top:1px;border-radius:50%;background:#ddf6f3;color:#087f82;font-size:12px;font-weight:900}
+    .price-card .button{width:100%;min-height:48px;margin-top:auto;align-self:stretch;box-shadow:0 8px 18px rgba(16,184,179,.17)}
+    .pricing-note{max-width:880px;margin:21px auto 0;text-align:center;color:#b8cbd4;font-size:13px;line-height:1.65}
+    .pricing-close{display:flex;align-items:center;justify-content:space-between;gap:20px;margin:28px 0 0;padding:19px 22px;border:1px solid rgba(132,224,218,.3);border-radius:10px;background:rgba(255,255,255,.055)}
+    .pricing-close p{margin:0;color:#e4eef1;font-size:15px;font-weight:650}
+    .pricing-close p span{display:block;color:#b8cbd4;font-size:13px;font-weight:400}
+    .pricing-close .button{flex:none;padding:14px 21px;box-shadow:0 9px 24px rgba(16,184,179,.22)}
+    .platform-section{padding:70px 0;background:#f6f9fa;border-top:1px solid #e7eef0;border-bottom:1px solid #e7eef0}
+    .platform-head{display:flex;align-items:flex-end;justify-content:space-between;gap:30px;margin-bottom:27px}
+    .platform-copy{max-width:720px}
+    .platform-copy .eyebrow{color:#078e8b}
+    .platform-copy h2{margin:12px 0 9px;font-size:clamp(28px,3.4vw,38px)}
+    .platform-copy p{margin:0;color:var(--muted);font-size:15px}
+    .platform-window{width:100%;overflow:hidden;padding:3px 2px 13px;mask-image:linear-gradient(90deg,transparent,#000 3%,#000 97%,transparent)}
+    .platform-track{display:flex;width:max-content;will-change:transform;animation:platform-float 40s linear infinite}
+    .platform-group{display:flex;flex:none;gap:16px;margin-right:16px}
+    @keyframes platform-float{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+    .platform-card{width:248px;min-height:122px;display:flex;flex:none;flex-direction:column;justify-content:center;gap:11px;padding:18px 20px;border:1px solid #d9e5e8;border-radius:9px;background:#fff;box-shadow:0 5px 18px rgba(7,26,45,.035)}
+    .platform-logo{height:35px;display:flex;align-items:center;gap:10px;color:#243844;white-space:nowrap}
+    .platform-logo svg{display:block;flex:none}
+    .microsoft-word{font:600 20px/1 "Segoe UI",Arial,sans-serif;letter-spacing:-.04em}
+    .google-word{font:500 19px/1 Arial,sans-serif;letter-spacing:-.04em}
+    .google-word small{margin-left:4px;color:#53616a;font-size:15px;letter-spacing:-.02em}
+    .aws-word{font:800 25px/1 Arial,sans-serif;letter-spacing:-.08em;color:#263746}
+    .cisco-word{font:500 18px/1 Arial,sans-serif;letter-spacing:.18em;color:#0876a9}
+    .fortinet-word{font:800 18px/1 Manrope,sans-serif;letter-spacing:.02em;color:#d9272e}
+    .crowdstrike-word{font:800 17px/1 Manrope,sans-serif;letter-spacing:-.04em;color:#202a31}
+    .platform-type{color:#5b707a;font-size:13px}
+    .platform-note{margin:13px 0 0;color:#647a84;font-size:12px}
+    .approach{display:grid;grid-template-columns:1fr 1fr;gap:65px;align-items:center}
+    .approach-photo{position:relative}
+    .approach-photo img{display:block;width:100%;aspect-ratio:1.22;object-fit:cover;border-radius:12px;box-shadow:var(--shadow)}
+    .photo-label{position:absolute;bottom:18px;left:18px;max-width:calc(100% - 36px);padding:13px 16px;border-radius:7px;background:rgba(7,26,45,.92);color:white;font:700 14px Manrope,sans-serif}
+        .approach-copy .eyebrow{color:#078e8b}
+    .approach-copy h2{max-width:520px}
+    .approach-copy>p{color:var(--muted);font-size:16px}
+    .principles{display:grid;gap:17px;margin-top:27px}
+    .principle{display:flex;gap:13px;align-items:flex-start}
+    .check{width:25px;height:25px;flex:none;display:grid;place-items:center;border-radius:50%;background:#dff5f3;color:#087d7c;font-weight:800}
+    .principle strong{display:block;font-size:15px;margin-bottom:2px;color:var(--navy)}
+    .principle span{display:block;color:var(--muted);font-size:14px}
+    .evidence-band{background:var(--navy);color:white;padding:76px 0}
+    .evidence-grid{display:grid;grid-template-columns:1.08fr .92fr;gap:58px;align-items:center}
+    .evidence-photo{position:relative}
+    .evidence-photo img{display:block;width:100%;aspect-ratio:1.4;object-fit:cover;border-radius:11px}
+    .evidence-photo figcaption{padding-top:9px;color:#aebfc8;font-size:12px}
+    .evidence-copy .eyebrow{color:var(--teal-light)}
+    .evidence-copy h2{color:white}
+    .evidence-copy p{color:#c7d4db;font-size:16px}
+    .evidence-points{display:grid;gap:13px;margin-top:24px}
+    .evidence-points div{display:flex;align-items:flex-start;gap:11px;color:#e4edf0;font-size:14px}
+    .evidence-points b{color:var(--teal-light);font-size:17px;line-height:1.3}
+    .band{padding:55px 0;background:#e8f6f5}
+    .band-row{display:flex;align-items:center;justify-content:space-between;gap:30px}
+    .band h2{font-size:30px;margin:0 0 8px}
+    .band p{margin:0;color:#4c6672;font-size:15px}
+    .contact{display:grid;grid-template-columns:.85fr 1.15fr;gap:64px;align-items:start}
+    .contact-copy .eyebrow{color:#078e8b}
+    .contact-copy p{color:var(--muted);font-size:15px}
+    .contact-note{margin-top:23px;padding:15px 17px;border-left:3px solid #078e8b;background:#eaf7f6;color:#365b64;font-size:13px;border-radius:0 8px 8px 0}
+    .contact-note a{color:#087f70;font-weight:800;text-decoration-thickness:1px;text-underline-offset:3px}
+    .whatsapp-float{position:fixed;right:24px;bottom:calc(20px + env(safe-area-inset-bottom));z-index:30;display:inline-flex;align-items:center;gap:10px;padding:13px 18px;border:1px solid rgba(255,255,255,.45);border-radius:999px;background:#20bd5a;color:#fff;text-decoration:none;font-size:15px;font-weight:800;box-shadow:0 12px 30px rgba(3,35,20,.3);transition:transform .2s,background .2s,box-shadow .2s}
+    .whatsapp-float:hover{transform:translateY(-3px);background:#169b49;box-shadow:0 16px 36px rgba(3,35,20,.38)}
+    .whatsapp-float:focus-visible{outline:3px solid #fff;outline-offset:3px}
+    .whatsapp-float svg{display:block;flex:none}
+    form{padding:28px;border:1px solid var(--line);border-radius:12px;background:white;box-shadow:0 14px 38px rgba(7,26,45,.07)}
+    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+    label{display:block;margin-bottom:7px;font-size:14px;font-weight:700;color:#33505f}
+    input,select,textarea{width:100%;border:1px solid #cddce1;border-radius:7px;background:#fbfdfe;padding:12px 13px;color:var(--ink);font:15px "DM Sans",sans-serif}
+    input:focus,select:focus,textarea:focus{outline:3px solid rgba(16,184,179,.2);border-color:#21aaa6}
+    .field{margin-bottom:16px}.field-wide{grid-column:1/-1}
+    textarea{min-height:106px;resize:vertical}
+    .form-foot{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:4px}
+    .form-foot small{max-width:270px;color:#667d87;font-size:12px;line-height:1.5}
+    .form-status{min-height:22px;margin:12px 0 0;color:#087f82;font-size:14px}
+    .footer{padding:42px 0 25px;background:#061624;color:#bed0d9}
+    .footer-row{display:flex;align-items:center;justify-content:space-between;gap:24px;padding-bottom:25px;border-bottom:1px solid rgba(255,255,255,.12)}
+    .footer-logo{display:inline-flex;padding:7px 12px;background:white;border-radius:7px}
+    .footer-logo img{display:block;width:230px;height:auto}
+    .footer-copy{text-align:right;font-size:13px;color:#c4d2d8}
+    .footer-copy p{margin:0 0 5px}.footer-copy a{color:#e1f4f3}
+    .footer-location-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:38px;align-items:stretch;padding:28px 0 5px}
+    .footer-address h2,.footer-map h2{margin:0 0 11px;color:#fff;font:800 17px/1.3 Manrope,sans-serif;letter-spacing:-.01em}
+    .footer-address .eyebrow{margin-bottom:9px;color:var(--teal-light);font-size:11px}
+    .footer-address address{margin:0;color:#d2e0e5;font-size:15px;line-height:1.75;font-style:normal}
+    .footer-address p{margin:13px 0 0;color:#a8bbc4;font-size:13px}
+    .map-link{display:inline-flex;margin-top:14px;color:#69e2da;text-decoration:none;font-size:14px;font-weight:750}
+    .map-link:hover{text-decoration:underline}
+    .footer-map iframe{display:block;width:100%;height:245px;border:0;border-radius:10px;background:#102e45;box-shadow:0 12px 32px rgba(0,0,0,.2)}
+    @media(max-width:920px){.links{gap:19px}.brand img{width:215px}.approach,.evidence-grid{gap:38px}.trust-item{padding:3px 15px}}
+    @media(max-width:860px){.nav{height:76px}.brand img{width:195px;max-height:66px}.menu-toggle{display:inline-flex}.links{display:none;position:absolute;left:0;right:0;top:76px;align-items:stretch;gap:0;flex-direction:column;padding:8px 22px 16px;background:white;border-bottom:1px solid var(--line);box-shadow:0 14px 22px rgba(7,26,45,.08)}.links.open{display:flex}.links a{padding:12px 3px}.nav-cta{display:none}}
+    @media(max-width:720px){
+      .wrap{width:min(100% - 34px,560px)}
+      .hero{min-height:680px;background-position:57% center;background-image:linear-gradient(90deg,rgba(5,20,35,.91),rgba(5,20,35,.74)),url('assets/incident-response-team.jpg')}.hero-content{padding:83px 0 100px}.hero-copy{font-size:16px}
+      .trust-grid{grid-template-columns:1fr;padding:12px 0}.trust-item,.trust-item:first-child{padding:13px 0;border:0;border-bottom:1px solid rgba(255,255,255,.14)}.trust-item:last-child{border-bottom:0}
+      .section{padding:68px 0}.service-grid,.pricing-grid{grid-template-columns:1fr}.service{padding:25px}.price-card>p{min-height:0}.pricing-close{align-items:flex-start;flex-direction:column}.pricing-close .button{width:100%}.footer-location-grid{grid-template-columns:1fr;gap:24px}.footer-map iframe{height:225px}.approach,.evidence-grid,.contact{grid-template-columns:1fr;gap:32px}.approach-photo{order:2}.evidence-band{padding:62px 0}.evidence-photo{order:2}.band{padding:43px 0}.band-row{align-items:flex-start;flex-direction:column}.band h2{font-size:25px}.form-grid{grid-template-columns:1fr}.field-wide{grid-column:auto}.form-foot{align-items:flex-start;flex-direction:column}.footer-row{align-items:flex-start;flex-direction:column}.footer-copy{text-align:left}
+      .whatsapp-float{right:15px;bottom:calc(14px + env(safe-area-inset-bottom));padding:12px 15px;font-size:14px}.platform-section{padding:58px 0}.platform-head{align-items:flex-start;flex-direction:column;gap:18px}.platform-card{width:min(78vw,290px)}
+    }
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important}.platform-window{overflow:visible;mask-image:none}.platform-track{display:block;width:100%;animation:none;transform:none}.platform-group{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:12px;margin:0}.platform-group[aria-hidden=true]{display:none}.platform-card{width:auto}}
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap nav">
+      <a class="brand" href="#top" aria-label="TraceShield Digital Forensics home"><img src="assets/traceshield-logo.png" alt="TraceShield Digital Forensics — Uncover the Evidence. Secure the Future."></a>
+      <button class="menu-toggle" aria-label="Open navigation" aria-expanded="false" aria-controls="nav-links"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+      <nav class="links" id="nav-links" aria-label="Main navigation"><a href="#services">Services</a><a href="#packages">Packages &amp; pricing</a><a href="#approach">Our approach</a><a href="#about">Who we support</a></nav>
+      <a class="nav-cta" href="#contact">Request a conversation</a>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="wrap hero-content">
+        <div class="eyebrow">Digital Forensics · Incident Response</div>
+        <h1>When an incident hits, <span>find the facts.</span></h1>
+        <p class="hero-copy">Practical digital forensics and incident response support for South African small and medium businesses. Understand what happened, protect the evidence and make your next decision with greater confidence.</p>
+        <div class="hero-actions"><a class="button" href="#contact">Talk through your next step</a><a class="button-outline" href="#services">Explore our services</a></div>
+      </div>
+    </section>
+
+    <section class="trust-row" aria-label="TraceShield focus areas">
+      <div class="wrap trust-grid">
+        <div class="trust-item"><span class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path d="M12 2.8 20 6v5.1c0 5.2-3.2 8.2-8 10.8-4.8-2.6-8-5.6-8-10.8V6l8-3.2Z"/><path d="m8.4 12.1 2.4 2.4 4.9-5.2"/></svg></span><div><strong>Incident readiness</strong><span>Prepare your people and processes</span></div></div>
+        <div class="trust-item"><span class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.8"/><path d="m15.6 15.6 5 5M8 12.2c1.1-1.5 1.9-2.1 3-2.1s1.9.6 3 2.1M8 9.1c.8-.8 1.6-1.2 2.5-1.2s1.7.4 2.5 1.2"/></svg></span><div><strong>Digital forensic triage</strong><span>Establish what is known</span></div></div>
+        <div class="trust-item"><span class="trust-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><rect x="5" y="4" width="15" height="17" rx="2"/><path d="M9 4.5V3h7v1.5M8.5 10l1.2 1.2 2-2M13.5 10h3M8.5 15l1.2 1.2 2-2M13.5 15h3"/></svg></span><div><strong>Response planning</strong><span>Make the next move deliberate</span></div></div>
+      </div>
+    </section>
+
+    <section class="section" id="services">
+      <div class="wrap">
+        <div class="section-head"><div class="eyebrow">Focused support</div><h2>Clarity for the moments that matter</h2><p>Defined, practical engagements help your team understand risk, preserve options and prepare for what comes next.</p></div>
+        <div class="service-grid">
+          <article class="service"><div class="service-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 3 20 6v5.5c0 5-3 7.8-8 10.5-5-2.7-8-5.5-8-10.5V6l8-3Z"/><path d="m8.5 12 2.2 2.2 4.8-5"/></svg></div><h3>Incident Readiness Assessment</h3><p>Review response arrangements, identify practical gaps and create a prioritized set of improvements suited to your business.</p><span class="service-tag">Prepare</span></article>
+          <article class="service"><div class="service-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5M8 10.5c0-1.5 1-2.5 2.5-2.5m-.2 5.2a3.2 3.2 0 0 0 3.2-3.2"/></svg></div><h3>Digital Forensic Triage</h3><p>A scoped initial review to help determine what may have happened, which evidence matters and what should be investigated next.</p><span class="service-tag">Understand</span></article>
+          <article class="service"><div class="service-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21V5.5Z"/><path d="M4 6h13M8 10h8m-8 4h6"/></svg></div><h3>Response Plan &amp; Workshop</h3><p>Build a clear incident response plan with defined roles, decision points and a guided scenario exercise for your team.</p><span class="service-tag">Respond</span></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section pricing-section" id="packages" aria-labelledby="packages-title">
+      <div class="wrap">
+        <div class="section-head"><div class="eyebrow">Service packages</div><h2 id="packages-title">Clear starting points. Scoped to your needs.</h2><p>Practical options for small and medium businesses. Choose a starting point and ask us to tailor the engagement to your needs.</p></div>
+        <div class="pricing-grid">
+          <article class="price-card"><h3>Incident Readiness Assessment</h3><p>A practical review of how your business would prepare for and respond to a cyber incident.</p><div class="price-amount">R2,500<small>Indicative introductory price</small></div><ul class="price-features"><li>Review of current response arrangements</li><li>Identify practical readiness gaps</li><li>Prioritised improvement recommendations</li></ul><a class="button" href="#contact">Request a quote</a></article>
+          <article class="price-card"><h3>Digital Forensic Triage</h3><p>A scoped initial review to help establish what may have happened and what to investigate next.</p><div class="price-amount">From R3,500<small>Final fee depends on agreed scope</small></div><ul class="price-features"><li>Written scope and evidence handling agreed first</li><li>Initial review of agreed evidence sources</li><li>Summary of findings and next steps</li></ul><a class="button" href="#contact">Request a quote</a></article>
+          <article class="price-card"><h3>Incident Response Plan &amp; Workshop</h3><p>Give your team a clear response plan and a guided opportunity to practise it.</p><div class="price-amount">R4,000<small>Indicative introductory price</small></div><ul class="price-features"><li>Defined roles and escalation steps</li><li>Practical incident response checklist</li><li>Facilitated scenario-based workshop</li></ul><a class="button" href="#contact">Request a quote</a></article>
+        </div>
+        <div class="pricing-close"><p>Not sure which package fits your situation?<span>Tell us what’s going on and we’ll help identify a suitable next step.</span></p><a class="button" href="#contact">Talk to TraceShield</a></div>
+        <p class="pricing-note">Introductory prices. Final quotes may vary with business size, scope, travel and technical complexity.</p>
+      </div>
+    </section>
+
+    <section class="platform-section" aria-labelledby="platform-title">
+      <div class="wrap">
+        <div class="platform-head">
+          <div class="platform-copy"><div class="eyebrow">Technology landscape</div><h2 id="platform-title">Platforms that may be part of the picture</h2><p>Digital investigations can involve many different technology environments. This carousel shows examples relevant to incident response and forensic triage.</p></div>
+        </div>
+        <div class="platform-window" aria-label="Technology platform examples">
+        <div class="platform-track" id="platform-track" aria-hidden="false">
+          <div class="platform-group">
+            <article class="platform-card" aria-label="Microsoft, cloud identity and productivity"><div class="platform-logo"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path fill="#f35325" d="M2 2h12v12H2z"/><path fill="#81bc06" d="M16 2h12v12H16z"/><path fill="#05a6f0" d="M2 16h12v12H2z"/><path fill="#ffba08" d="M16 16h12v12H16z"/></svg><span class="microsoft-word">Microsoft</span></div><span class="platform-type">Cloud, identity and productivity</span></article>
+            <article class="platform-card" aria-label="Google Cloud, cloud and collaboration"><div class="platform-logo"><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><path fill="#4285f4" d="M29 16.4c0-1-.1-2-.3-2.9H16v5.5h7.3a6.2 6.2 0 0 1-2.7 4.1l4.4 3.4c2.6-2.4 4-5.9 4-10.1Z"/><path fill="#34a853" d="M16 29.5c3.7 0 6.8-1.2 9-3.1l-4.4-3.4c-1.2.8-2.7 1.3-4.6 1.3-3.5 0-6.4-2.4-7.5-5.6l-4.5 3.5c2.2 4.4 6.7 7.3 12 7.3Z"/><path fill="#fbbc05" d="M8.5 18.7a8.3 8.3 0 0 1 0-5.4L4 9.8a13.4 13.4 0 0 0 0 12.4l4.5-3.5Z"/><path fill="#ea4335" d="M16 7.7c2 0 3.7.7 5 2l3.8-3.8A12.8 12.8 0 0 0 16 2.5c-5.3 0-9.8 2.9-12 7.3l4.5 3.5c1.1-3.2 4-5.6 7.5-5.6Z"/></svg><span class="google-word">Google<small>Cloud</small></span></div><span class="platform-type">Cloud and collaboration</span></article>
+            <article class="platform-card" aria-label="Amazon Web Services, cloud infrastructure"><div class="platform-logo"><span class="aws-word">aws</span><svg width="54" height="26" viewBox="0 0 54 26" aria-hidden="true"><path d="M4 11c12 10 30 10 44-1" fill="none" stroke="#ff9900" stroke-width="3" stroke-linecap="round"/><path d="m43 7 6 3-5 4" fill="none" stroke="#ff9900" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="platform-type">Cloud infrastructure</span></article>
+            <article class="platform-card" aria-label="Cisco, networks and security"><div class="platform-logo"><svg width="54" height="28" viewBox="0 0 54 28" aria-hidden="true" fill="#0876a9"><rect x="2" y="12" width="4" height="9" rx="2"/><rect x="10" y="6" width="4" height="15" rx="2"/><rect x="18" y="2" width="4" height="19" rx="2"/><rect x="26" y="9" width="4" height="12" rx="2"/><rect x="34" y="4" width="4" height="17" rx="2"/><rect x="42" y="11" width="4" height="10" rx="2"/><rect x="50" y="14" width="3" height="7" rx="1.5"/></svg><span class="cisco-word">cisco</span></div><span class="platform-type">Networks and security</span></article>
+            <article class="platform-card" aria-label="Fortinet, network security"><div class="platform-logo"><svg width="31" height="30" viewBox="0 0 31 30" aria-hidden="true" fill="#d9272e"><path d="M2 3h27v5H2zM2 10h12v5H2zM17 10h12v5H17zM2 17h27v5H2zM2 24h12v4H2zM17 24h12v4H17z"/></svg><span class="fortinet-word">FORTINET</span></div><span class="platform-type">Network security</span></article>
+            <article class="platform-card" aria-label="CrowdStrike, endpoint security"><div class="platform-logo"><svg width="34" height="31" viewBox="0 0 34 31" aria-hidden="true" fill="#e31b34"><path d="M2 4 15 9 8 1l13 6 11-5-7 10 7 6-13-3-7 14-2-13L2 4Z"/><path d="m13 14 8 2-5 11-3-13Z" fill="#fff"/></svg><span class="crowdstrike-word">CrowdStrike</span></div><span class="platform-type">Endpoint security</span></article>
+          </div>
+          <div class="platform-group" aria-hidden="true">
+            <article class="platform-card"><div class="platform-logo"><svg width="30" height="30" viewBox="0 0 30 30"><path fill="#f35325" d="M2 2h12v12H2z"/><path fill="#81bc06" d="M16 2h12v12H16z"/><path fill="#05a6f0" d="M2 16h12v12H2z"/><path fill="#ffba08" d="M16 16h12v12H16z"/></svg><span class="microsoft-word">Microsoft</span></div><span class="platform-type">Cloud, identity and productivity</span></article>
+            <article class="platform-card"><div class="platform-logo"><svg width="32" height="32" viewBox="0 0 32 32"><path fill="#4285f4" d="M29 16.4c0-1-.1-2-.3-2.9H16v5.5h7.3a6.2 6.2 0 0 1-2.7 4.1l4.4 3.4c2.6-2.4 4-5.9 4-10.1Z"/><path fill="#34a853" d="M16 29.5c3.7 0 6.8-1.2 9-3.1l-4.4-3.4c-1.2.8-2.7 1.3-4.6 1.3-3.5 0-6.4-2.4-7.5-5.6l-4.5 3.5c2.2 4.4 6.7 7.3 12 7.3Z"/><path fill="#fbbc05" d="M8.5 18.7a8.3 8.3 0 0 1 0-5.4L4 9.8a13.4 13.4 0 0 0 0 12.4l4.5-3.5Z"/><path fill="#ea4335" d="M16 7.7c2 0 3.7.7 5 2l3.8-3.8A12.8 12.8 0 0 0 16 2.5c-5.3 0-9.8 2.9-12 7.3l4.5 3.5c1.1-3.2 4-5.6 7.5-5.6Z"/></svg><span class="google-word">Google<small>Cloud</small></span></div><span class="platform-type">Cloud and collaboration</span></article>
+            <article class="platform-card"><div class="platform-logo"><span class="aws-word">aws</span><svg width="54" height="26" viewBox="0 0 54 26"><path d="M4 11c12 10 30 10 44-1" fill="none" stroke="#ff9900" stroke-width="3" stroke-linecap="round"/><path d="m43 7 6 3-5 4" fill="none" stroke="#ff9900" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="platform-type">Cloud infrastructure</span></article>
+            <article class="platform-card"><div class="platform-logo"><svg width="54" height="28" viewBox="0 0 54 28" fill="#0876a9"><rect x="2" y="12" width="4" height="9" rx="2"/><rect x="10" y="6" width="4" height="15" rx="2"/><rect x="18" y="2" width="4" height="19" rx="2"/><rect x="26" y="9" width="4" height="12" rx="2"/><rect x="34" y="4" width="4" height="17" rx="2"/><rect x="42" y="11" width="4" height="10" rx="2"/><rect x="50" y="14" width="3" height="7" rx="1.5"/></svg><span class="cisco-word">cisco</span></div><span class="platform-type">Networks and security</span></article>
+            <article class="platform-card"><div class="platform-logo"><svg width="31" height="30" viewBox="0 0 31 30" fill="#d9272e"><path d="M2 3h27v5H2zM2 10h12v5H2zM17 10h12v5H17zM2 17h27v5H2zM2 24h12v4H2zM17 24h12v4H17z"/></svg><span class="fortinet-word">FORTINET</span></div><span class="platform-type">Network security</span></article>
+            <article class="platform-card"><div class="platform-logo"><svg width="34" height="31" viewBox="0 0 34 31" fill="#e31b34"><path d="M2 4 15 9 8 1l13 6 11-5-7 10 7 6-13-3-7 14-2-13L2 4Z"/><path d="m13 14 8 2-5 11-3-13Z" fill="#fff"/></svg><span class="crowdstrike-word">CrowdStrike</span></div><span class="platform-type">Endpoint security</span></article>
+          </div>
+        </div>
+        </div>
+        <p class="platform-note">These are examples of technology vendors only. Their names are used for identification; they are not TraceShield clients, partners or endorsers.</p>
+      </div>
+    </section>
+
+    <section class="section section-soft" id="approach">
+      <div class="wrap approach">
+        <figure class="approach-photo"><img src="assets/sme-consultation.jpg" alt="A cybersecurity consultant discussing an incident-readiness checklist with a small-business owner"><figcaption class="photo-label">Practical guidance for smaller teams</figcaption></figure>
+        <div class="approach-copy"><div class="eyebrow">A careful, practical approach</div><h2>Good decisions start with a clear picture.</h2><p>During a security incident, uncertainty can lead to rushed decisions. Our approach helps smaller teams establish the facts, understand their options and move forward deliberately.</p>
+          <div class="principles">
+            <div class="principle"><span class="check">✓</span><div><strong>Evidence-aware</strong><span>Respect the integrity and context of relevant digital evidence.</span></div></div>
+            <div class="principle"><span class="check">✓</span><div><strong>Plain-language findings</strong><span>Explain what is known, what remains uncertain and why it matters.</span></div></div>
+            <div class="principle"><span class="check">✓</span><div><strong>Proportionate next steps</strong><span>Focus recommendations on your business, resources and current priorities.</span></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="evidence-band">
+      <div class="wrap evidence-grid">
+        <div class="evidence-copy"><div class="eyebrow">Digital evidence handled carefully</div><h2>Methodical work. Clear explanations.</h2><p>Forensic triage begins with a defined scope and careful handling. The aim is to help your organization understand relevant findings and make informed decisions about what to do next.</p>
+          <div class="evidence-points"><div><b>✓</b><span>Identify the systems and evidence relevant to the question.</span></div><div><b>✓</b><span>Separate observations from assumptions and unanswered questions.</span></div><div><b>✓</b><span>Translate technical findings into practical business actions.</span></div></div>
+        </div>
+        <figure class="evidence-photo"><img src="assets/forensic-workbench.jpg" alt="Analyst documenting a laptop and removable media at a digital forensics workbench"></figure>
+      </div>
+    </section>
+
+    <section class="band" id="about">
+      <div class="wrap band-row"><div><h2>Built around small and medium businesses.</h2><p>Founder-led, appointment-based support for SMEs in Gauteng, focused on readiness and incident clarity.</p></div><a class="button" href="#contact">Start a conversation</a></div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="wrap contact">
+        <div class="contact-copy"><div class="eyebrow">Make contact</div><h2>Tell us what you’re facing.</h2><p>Share a little context and the kind of help you’re looking for. Please avoid including passwords, personal records or sensitive evidence in this initial message.</p><p>For active incidents, the first conversation can help establish urgency, scope and an appropriate next step.</p><div class="contact-note">For a quick conversation, message us on WhatsApp: <a href="https://wa.me/27833218847" target="_blank" rel="noopener noreferrer">083 321 8847</a>.</div></div>
+        <form id="enquiry-form">
+          <div class="form-grid">
+            <div class="field"><label for="name">Your name</label><input id="name" name="name" autocomplete="name" required placeholder="Name"></div>
+            <div class="field"><label for="business">Business name</label><input id="business" name="business" autocomplete="organization" placeholder="Business or organization"></div>
+            <div class="field"><label for="email">Email address</label><input id="email" name="email" type="email" autocomplete="email" required placeholder="you@business.co.za"></div>
+            <div class="field"><label for="topic">What do you need?</label><select id="topic" name="topic" required><option value="">Choose a topic</option><option>Active incident support</option><option>Digital forensic triage</option><option>Incident readiness</option><option>Response plan or workshop</option><option>Something else</option></select></div>
+            <div class="field field-wide"><label for="message">Briefly describe your request</label><textarea id="message" name="message" required placeholder="A short, non-sensitive summary is enough."></textarea></div>
+          </div>
+          <div class="form-foot"><small>This form copies your enquiry so you can paste it into WhatsApp.</small><button class="button" type="submit">Prepare enquiry</button></div>
+          <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap">
+      <div class="footer-row">
+        <a class="footer-logo" href="#top" aria-label="TraceShield Digital Forensics home"><img src="assets/traceshield-logo.png" alt="TraceShield Digital Forensics"></a>
+        <div class="footer-copy"><p>Uncover the Evidence. Secure the Future.</p><a href="#contact">Request a conversation</a></div>
+      </div>
+      <div class="footer-location-grid">
+        <section class="footer-address" aria-labelledby="office-address-title">
+          <div class="eyebrow">Visit TraceShield</div>
+          <h2 id="office-address-title">Fourways office</h2>
+          <address>Office 251, Space Building 2<br>Fourways Business Centre<br>125 Leslie Road<br>Fourways, 2054</address>
+          <p>Meetings are arranged by appointment.</p>
+          <a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=Office%20251%2C%20Space%20Building%202%2C%20Fourways%20Business%20Centre%2C%20125%20Leslie%20Road%2C%20Fourways%2C%202054" target="_blank" rel="noopener noreferrer">Open directions in Google Maps</a>
+        </section>
+        <section class="footer-map" aria-labelledby="office-map-title">
+          <h2 id="office-map-title">Find our office</h2>
+          <iframe title="Google Map showing the TraceShield office at Fourways Business Centre, 125 Leslie Road, Fourways" src="https://www.google.com/maps?q=Office%20251%2C%20Space%20Building%202%2C%20Fourways%20Business%20Centre%2C%20125%20Leslie%20Road%2C%20Fourways%2C%202054&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+        </section>
+      </div>
+    </div>
+  </footer>
+  <a class="whatsapp-float" href="https://wa.me/27833218847" target="_blank" rel="noopener noreferrer" aria-label="Chat with TraceShield on WhatsApp at 083 321 8847">
+    <svg width="24" height="24" viewBox="0 0 32 32" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M27 15.5a11 11 0 0 1-16.2 9.7L5 27l1.8-5.6A11 11 0 1 1 27 15.5Z"/><path d="M11.4 10.5c.3-.7.7-.7 1.1-.7h.7c.2 0 .5.1.7.6l1 2.4c.1.3.1.5-.1.8l-.8 1c-.2.2-.3.4-.1.7.5.9 1.3 1.7 2.1 2.2.3.2.5.2.7-.1l1-1.1c.2-.3.5-.3.8-.2l2.4 1.1c.3.2.5.3.5.6 0 .4-.2 1.4-.9 2-.7.6-1.5.9-2.5.7-1-.2-2.3-.7-3.9-1.7-1.3-.9-2.5-2.1-3.3-3.4-.8-1.3-1.1-2.4-1-3.2.1-.9.5-1.4.9-1.7Z"/></svg>
+    <span>WhatsApp us</span>
+  </a>
+<script>
+  const toggle=document.querySelector('.menu-toggle');
+  const nav=document.querySelector('.links');
+  toggle.addEventListener('click',()=>{const open=nav.classList.toggle('open');toggle.setAttribute('aria-expanded',String(open));});
+  nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');toggle.setAttribute('aria-expanded','false');}));
+  const form=document.querySelector('#enquiry-form');
+  const status=document.querySelector('#form-status');
+  form.addEventListener('submit',async event=>{
+    event.preventDefault();
+    if(!form.reportValidity()) return;
+    const d=new FormData(form);
+    const draft='TraceShield enquiry\n\nName: '+d.get('name')+'\nBusiness: '+(d.get('business')||'Not provided')+'\nEmail: '+d.get('email')+'\nTopic: '+d.get('topic')+'\n\nRequest:\n'+d.get('message');
+    try{
+      await navigator.clipboard.writeText(draft);
+      status.textContent='Your enquiry has been copied. Tap the WhatsApp button to send it to TraceShield.';
+    }catch{
+      const area=document.createElement('textarea');area.value=draft;area.style.position='fixed';area.style.opacity='0';document.body.appendChild(area);area.select();
+      const copied=document.execCommand('copy');area.remove();
+      status.textContent=copied?'Your enquiry has been copied. Tap the WhatsApp button to send it to TraceShield.':'Your enquiry is ready. Copy the details and send them to TraceShield on WhatsApp.';
+    }
+  });
+</script>
+</body>
+</html>
